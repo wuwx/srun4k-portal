@@ -1,91 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html ng-app lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>IP控制网关</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/app.css" type="text/css" rel="stylesheet" media="all" />
+  <script src="js/app.js"></script>
+</head>
 
-        <title>Laravel</title>
+<body class="bottom">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  <!-- Begin container-->
+  <div class="container">
+    <div class="wrapper">
+      <div class="header"><h1>IP控制网关</h1></div>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+      <div class="toolbar hidden-xs">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#">IP控制网关</a></li>
+          <!--<li><a href="http://jifei.neu.edu.cn/user" target="_blank">计费自助服务</a></li>-->
+          <li><a href="http://ipgw.neu.edu.cn:8800" target="_blank">上网费用查询</a></li>
+          <li><a href="http://stu.neu.edu.cn" target="_blank">学生电子邮件</a></li>
+          <li><a href="http://network.neu.edu.cn/portal/" target="_blank">IT服务门户</a></li>
+        </ul>
+      </div>
 
-            .full-height {
-                height: 100vh;
-            }
+      <div class="content">
+        <div class="row">
+          <div class="col-lg-2 col-sm-3 hidden-xs">
+             <ul class="list-group">
+               <a class="list-group-item" href="http://jifei.neu.edu.cn/user/activity" target="_blank">自助开通上网账号</a>
+               <a class="list-group-item" href="http://jifei.neu.edu.cn/user/password" target="_blank">忘记上网登录密码</a>
+             </ul>
+          </div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+          <div class="col-lg-10 col-sm-9">
+						
+            <form name="form2" action="srun_portal_pc.php?url=&ac_id=1" class="form-horizontal" method="post" onsubmit="return check(this)">
+                <input type="hidden" name="action" value="login">
+                <input type="hidden" name="ac_id" value="1">
+                <input type="hidden" name="user_ip" value="">
+                <input type="hidden" name="nas_ip" value="">
+                <input type="hidden" name="user_mac" value="">
+                <input type="hidden" name="url" value="" >
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
+                <p></p>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="username">用户名(Username):</label>
+                  <div class="col-sm-5">
+                    <input class="form-control" type="text" name="username" size=35 value="09331" />
+                  </div>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="password">密&nbsp;&nbsp;码(Password):</label>
+                  <div class="col-sm-5">
+                    <input class="form-control" type="password" name="password" size=35 value="" />
+                  </div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <input name="save_me" title="记忆密码" type="hidden" value="0"  />
+                <!--
+                <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input name="save_me" title="记忆密码" type="checkbox" value="1"  /> 记住密码
+                      </label>
+                    </div>
+                  </div>
                 </div>
+                -->
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" value="连接网络(Connect)" class="btn btn-primary">
+                    <input type="button" value="断开网络(Disconnect)" class="btn btn-default" onclick="do_logout()">
+                    <input type="button" value="断开全部连接(Disconnect All)" class="btn btn-default" onclick="do_logout()">
+                    <!--<input type="button" value="自服务" class="btn btn-success" onclick="window.open('http://202.118.1.88:8800')">-->
+                  </div>
+                </div>
+              </form>
             </div>
         </div>
-    </body>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">最新网络中心黑板报</div>
+              <div class="panel-body">
+                <ul ng-controller="NetworkPostsController">
+                  <li ng-repeat="post in posts">
+                    <a target="_blank" ng-href="@{{post.url}}">[@{{post.date}}] @{{post.title}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">常见问题与注意事项</div>
+              <div class="panel-body">
+                <ul>
+                  <li>新系统月租月末结算, 余额信息为未收取当月月租，账户余额大于月租方可上网</li>
+                  <li><a href="http://network.neu.edu.cn/archives/645">校园网续费时间调整为：上午8:00-11:30，下午14:30-16:00</a></li>
+                  <li><a href="http://network.neu.edu.cn/archives/574">开学啦！忘记二次密码了么？通过密码直接更改二次密码吧！</a></li>
+                  <li><a href="http://network.neu.edu.cn/archives/472">无线网络环境中使用校园网的注意事项</a></li>
+                  <li><a href="http://ipgw.neu.edu.cn/faq.htm#yuanyin">P2P软件下载校内资源产生流量问题</a></li>
+                  <li><a href="http://ipgw.neu.edu.cn/faq.htm#yuanyin">常见收费流量产生的原因</a> <a href="faq.htm">常见问题解答</a></li>
+                  <li>
+                    <a href="http://hdtv.neu6.edu.cn/newplayer?p=cctv5hd" target="_blank">CCTV5(高清)</a>
+                    <a href="http://hdtv.neu6.edu.cn/newplayer?p=hunanhd" target="_blank">湖南卫视(高清)</a>
+                    <a href="http://hdtv.neu6.edu.cn/newplayer?p=zjhd" target="_blank">浙江卫视(高清)</a>
+                    <a href="http://hdtv.neu6.edu.cn/" target="_blank">更多...</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--div class="well">
+          <p>hello</p>
+        </div-->
+      	<div class="well">
+          <div class="pull-right hidden-xs">
+            <img src="/files/weixin.jpg" width="100px" />
+          </div>
+          <h4>注意：</h4>
+          <p>1. 请务必在下机前到IP网关来断开您的连接，否则容易因意外流量损失自己的费用。重启机器前也要断开您的连接，养成良好的注册习惯。</p>
+          <p>2. 网络中心电话：技术咨询 87240（校内小号）； 费用问题 87251（校内小号） </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      &copy; 1993-2013 Northeastern University Networking Center. All rights reserved.<br />
+      缴费问题：83687251（外线），87251（内线）；技术咨询 83687240（外线），87240（内线）
+    </div>
+  </div>
+  <!-- End container-->
+
+</body>
 </html>

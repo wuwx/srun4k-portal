@@ -7,3 +7,59 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/theme";
+
+body {
+  background: #EEE;
+  font-family: "Open Sans",Arial,"Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif;
+  padding: 20px 0;
+}
+
+a {
+  color: #DA8C0B;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.wrapper {
+  border-radius: 7px;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.03);
+}
+
+.header {
+  background: #3498DB;
+  border-radius: 7px 7px 0 0;
+  color: #FFF;
+  padding: 10px 20px;
+}
+
+.toolbar {
+  background: #2C3E50;
+  padding-top: 5px;
+  padding-left: 20px;
+}
+.toolbar li a {
+  border: none;
+  color: #FFF;
+}
+.toolbar li a:hover {
+  border: none;
+  background: none;
+}
+.toolbar .nav-tabs {
+  border-bottom: none;
+}
+
+.content {
+  border-radius: 0 0 7px 7px;
+  padding: 20px 20px 1px;
+  background: #FFF;
+}
+
+.footer {
+  color: #999;
+  padding: 20px;
+}
