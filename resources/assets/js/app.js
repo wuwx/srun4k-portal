@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('network', require('./components/Network.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -6,7 +6,6 @@
   <title>IP控制网关</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/css/app.css" type="text/css" rel="stylesheet" media="all" />
-  <script src="js/app.js"></script>
 </head>
 
 <body class="bottom">
@@ -83,18 +82,9 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="app">
           <div class="col-md-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">最新网络中心黑板报</div>
-              <div class="panel-body">
-                <ul ng-controller="NetworkPostsController">
-                  <li ng-repeat="post in posts">
-                    <a target="_blank" ng-href="@{{post.url}}">[@{{post.date}}] @{{post.title}}</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <network />
           </div>
           <div class="col-md-6 col-xs-12">
             <div class="panel panel-default">
@@ -137,6 +127,6 @@
     </div>
   </div>
   <!-- End container-->
-
+  <script src="/js/app.js"></script>
 </body>
 </html>
