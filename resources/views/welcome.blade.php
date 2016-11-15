@@ -113,7 +113,7 @@
         </div-->
       	<div class="well">
           <div class="pull-right hidden-xs">
-            <img src="/files/weixin.jpg" width="100px" />
+            <img src="/img/weixin.jpg" width="100px" />
           </div>
           <h4>注意：</h4>
           <p>1. 请务必在下机前到IP网关来断开您的连接，否则容易因意外流量损失自己的费用。重启机器前也要断开您的连接，养成良好的注册习惯。</p>
