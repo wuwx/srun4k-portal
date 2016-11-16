@@ -3,6 +3,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta http-equiv="pragma" content="no-cache" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script>
+    window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+  </script>
   <title>IP控制网关</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/css/app.css" type="text/css" rel="stylesheet" media="all" />
@@ -35,7 +39,7 @@
           </div>
 
           <div class="col-lg-10 col-sm-9">
-						
+
             <form name="form2" action="srun_portal_pc.php?url=&ac_id=1" class="form-horizontal" method="post" onsubmit="return check(this)">
                 <input type="hidden" name="action" value="login">
                 <input type="hidden" name="ac_id" value="1">
