@@ -11,5 +11,6 @@
 |
 */
 
-Route::get('/', 'ConnectionController@index');
-Route::resource('connection', 'ConnectionController', ['except' => ['index']]);
+Route::get('/', 'ConnectionController@show');
+Route::post('/connection', 'ConnectionController@create');
+Route::delete('/connection', 'ConnectionController@destroy');
