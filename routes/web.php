@@ -11,8 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('connection', 'ConnectionController');
+Route::get('/', 'ConnectionController@index');
+Route::resource('connection', 'ConnectionController', ['except' => ['index']]);
