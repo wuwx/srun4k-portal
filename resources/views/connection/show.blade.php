@@ -44,7 +44,8 @@
 
           <div class="col-lg-10 col-sm-9">
 
-            <form name="form2" action="srun_portal_pc.php?url=&ac_id=1" class="form-horizontal" method="post" onsubmit="return check(this)">
+            <form name="form2" action="/connection" class="form-horizontal" method="post" onsubmit="return check(this)">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <input type="hidden" name="action" value="login">
                 <input type="hidden" name="ac_id" value="1">
                 <input type="hidden" name="user_ip" value="">
