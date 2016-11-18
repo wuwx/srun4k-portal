@@ -57,13 +57,13 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="username">用户名(Username):</label>
                   <div class="col-sm-5">
-                    <input class="form-control" type="text" name="username" size=35 value="09331" />
+                    <input class="form-control" type="text" name="user_name" size=35 />
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="password">密&nbsp;&nbsp;码(Password):</label>
                   <div class="col-sm-5">
-                    <input class="form-control" type="password" name="password" size=35 value="" />
+                    <input class="form-control" type="password" name="user_password" size=35 />
                   </div>
                 </div>
 

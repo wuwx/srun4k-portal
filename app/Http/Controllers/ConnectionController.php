@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConnectionRequest;
 use Illuminate\Http\Request;
 
 class ConnectionController extends Controller
@@ -12,9 +13,9 @@ class ConnectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(ConnectionRequest $request)
     {
-        //
+        return view('connection.create');
     }
 
     /**
@@ -34,6 +35,6 @@ class ConnectionController extends Controller
      */
     public function destroy()
     {
-        //
+        return view('connection.destroy');
     }
 }
