@@ -7,8 +7,15 @@ use Illuminate\Http\Request;
 
 class ConnectionController extends Controller
 {
-    private $_server_ip = '127.0.0.1';
-    private $_server_port = 3358;
+    private $_porta_server_ip;
+    private $_portal_server_port;
+
+    public function __construct()
+    {
+        $this->_porta_server_ip = '127.0.0.1';
+        $this->_porta_server_port = 3358;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -32,7 +39,7 @@ class ConnectionController extends Controller
         $json = json_encode($array);
 
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        socket_sendto($socket, $json, strlen($json), 0, $this->_server_ip, $this->_server_port);
+        socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
         socket_recvfrom($socket, $buffer,1024, 0, $from, $port);
 
         return view('connection.create');
@@ -68,7 +75,7 @@ class ConnectionController extends Controller
         $json = json_encode($array);
 
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        socket_sendto($socket, $json, strlen($json), 0, $this->_server_ip, $this->_server_port);
+        socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
         socket_recvfrom($socket, $buffer,1024, 0, $from, $port);
 
         return view('connection.destroy');
