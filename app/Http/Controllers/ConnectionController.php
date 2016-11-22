@@ -29,7 +29,7 @@ class ConnectionController extends Controller
         $port = "";
         $array = [
             'action' => 1,
-            'serial_code' => time().rand(111111,999999),
+            'serial_code' => time() . rand(111111, 999999),
             'time' => time(),
             'user_name' => $request->user_name,
             'user_password' => $request->user_password,
@@ -41,7 +41,7 @@ class ConnectionController extends Controller
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 2, "usec" => 0));
         socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
-        socket_recvfrom($socket, $buffer,1024, 0, $from, $port);
+        socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
         return view('connection.create');
     }
@@ -51,7 +51,7 @@ class ConnectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
         return view('connection.show');
     }
@@ -63,22 +63,55 @@ class ConnectionController extends Controller
      */
     public function destroy(Request $request)
     {
+        switch ($request->action) {
+            case 2:
+                return $this->destroyByUserIp($request);
+            case 3:
+                return $this->destroyByUserIp($request);
+        }
+    }
+
+    public function destroyByUserName(Request $request)
+    {
+        $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 0));
+
         $buffer = "";
         $from = "";
         $port = "";
+
+        $array = [
+            "action" => 3,
+            'serial_code' => time().rand(111111,999999),
+            'time' => time(),
+            'user_name' => $request->user_name,
+            'user_password' => $request->user_password,
+        ];
+        $json = json_encode($array);
+        socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
+        socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
+
+        return view('connection.destroy');
+    }
+
+    public function destroyByUserIp(Request $request)
+    {
+        $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 0));
+
+        $buffer = "";
+        $from = "";
+        $port = "";
+
         $array = [
             "action" => 2,
-            'serial_code' => time().rand(111111,999999),
+            'serial_code' => time() . rand(111111, 999999),
             'time' => time(),
             'user_ip' => $request->ip(),
         ];
-
         $json = json_encode($array);
-
-        $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 2, "usec" => 0));
         socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
-        socket_recvfrom($socket, $buffer,1024, 0, $from, $port);
+        socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
         return view('connection.destroy');
     }

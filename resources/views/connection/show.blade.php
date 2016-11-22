@@ -83,9 +83,8 @@
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
                     <input type="submit" value="连接网络(Connect)" class="btn btn-primary">
-                    <a href="/connection" class="btn btn-default" data-method="delete">断开网络(Disconnect)</a>
-                    <input type="button" value="断开全部连接(Disconnect All)" class="btn btn-default" onclick="do_logout()">
-                    <!--<input type="button" value="自服务" class="btn btn-success" onclick="window.open('http://202.118.1.88:8800')">-->
+                    <a href="/connection" class="btn btn-default" data-method="DELETE" data-remote="true" data-disable-with="正在断开..." data-params='{"action": "2"}'>断开网络(Disconnect)</a>
+                    <a href="/connection" class="btn btn-default" data-method="DELETE" data-remote="true" data-disable-with="正在断开..." data-params='{"action": "3"}'>断开全部连接(Disconnect All)</a>
                   </div>
                 </div>
               </form>
