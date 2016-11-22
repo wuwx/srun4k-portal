@@ -3,6 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="csrf-param" content="_token">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>IP控制网关</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,7 +83,7 @@
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
                     <input type="submit" value="连接网络(Connect)" class="btn btn-primary">
-                    <input type="button" value="断开网络(Disconnect)" class="btn btn-default" onclick="do_logout()">
+                    <a href="/connection" class="btn btn-default" data-method="delete">断开网络(Disconnect)</a>
                     <input type="button" value="断开全部连接(Disconnect All)" class="btn btn-default" onclick="do_logout()">
                     <!--<input type="button" value="自服务" class="btn btn-success" onclick="window.open('http://202.118.1.88:8800')">-->
                   </div>

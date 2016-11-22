@@ -22,7 +22,7 @@ class ConnectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(ConnectionRequest $request)
+    public function store(ConnectionRequest $request)
     {
         $buffer = "";
         $from = "";
@@ -60,7 +60,7 @@ class ConnectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
         $buffer = "";
         $from = "";
