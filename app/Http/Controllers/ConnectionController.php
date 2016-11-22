@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConnectionRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ConnectionController extends Controller
 {
@@ -113,6 +114,14 @@ class ConnectionController extends Controller
         socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
-        return view('connection.destroy');
+        switch($request->format()) {
+            case 'js':
+                return Response::make(view('connection.destroy'), 200, [
+                    'Content-Type' => "application/javascript; charset=UTF-8",
+                ]);
+            case 'html':
+                return view('connection.destroy');
+        }
+
     }
 }
