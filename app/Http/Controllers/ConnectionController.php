@@ -39,6 +39,7 @@ class ConnectionController extends Controller
         $json = json_encode($array);
 
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 2, "usec" => 0));
         socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
         socket_recvfrom($socket, $buffer,1024, 0, $from, $port);
 
@@ -75,6 +76,7 @@ class ConnectionController extends Controller
         $json = json_encode($array);
 
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 2, "usec" => 0));
         socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
         socket_recvfrom($socket, $buffer,1024, 0, $from, $port);
 
