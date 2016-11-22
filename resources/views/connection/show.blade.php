@@ -20,7 +20,7 @@
 <body class="bottom">
 
   <!-- Begin container-->
-  <div class="container">
+  <div class="container" id="app">
     <div class="wrapper">
       <div class="header"><h1>IP控制网关</h1></div>
 
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="row" id="app">
+        <div class="row">
           <div class="col-md-6">
             <network />
           </div>
