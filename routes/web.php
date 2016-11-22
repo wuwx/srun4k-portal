@@ -14,3 +14,4 @@
 Route::get('/', 'ConnectionController@show');
 Route::post('/connection', 'ConnectionController@create');
 Route::delete('/connection', 'ConnectionController@destroy');
+Route::resource('/post', 'PostController');

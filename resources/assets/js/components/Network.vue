@@ -14,7 +14,7 @@
 <script>
     export default {
         data() {
-            this.$http.jsonp('http://network.neu.edu.cn/api/get_recent_posts/')
+            this.$http.get('/post')
                 .then(function(response) {
                     this.posts = response.data.posts.slice(0, 7);
                     this.posts.forEach(function(post){
