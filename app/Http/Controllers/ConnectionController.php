@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConnectionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
 
 class ConnectionController extends Controller
 {
@@ -47,8 +46,6 @@ class ConnectionController extends Controller
 
         switch($request->format()) {
             case 'js':
-                View::addExtension("js.blade.php", "blade");
-                View::addExtension("js.php", "php");
                 return Response::make(view('connection.create'), 201, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
                 ]);
@@ -124,14 +121,10 @@ class ConnectionController extends Controller
 
         switch($request->format()) {
             case 'js':
-                View::addExtension("js.blade.php", "blade");
-                View::addExtension("js.php", "php");
                 return Response::make(view('connection.destroy'), 200, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
                 ]);
             case 'html':
-                View::addExtension("html.blade.php", "blade");
-                View::addExtension("html.php", "php");
                 return view('connection.destroy');
         }
 
