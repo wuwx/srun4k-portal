@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConnectionRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
 
 class ConnectionController extends Controller
@@ -59,7 +60,12 @@ class ConnectionController extends Controller
      */
     public function show(Request $request)
     {
-        return view('connection.show');
+        $connection = Connection::findByUserIP($request->ip());
+        if ($json = Cache::get('json')) {
+            return json_decode($json)->posts[0]->title;
+        } else {
+            return view('connection.show');
+        }
     }
 
     /**
@@ -71,9 +77,9 @@ class ConnectionController extends Controller
     {
         switch ($request->action) {
             case 2:
-                return $this->destroyByUserIp($request);
+                return $this->destroyByUserIP($request);
             case 3:
-                return $this->destroyByUserIp($request);
+                return $this->destroyByUserIP($request);
         }
     }
 
@@ -100,7 +106,7 @@ class ConnectionController extends Controller
         return view('connection.destroy');
     }
 
-    public function destroyByUserIp(Request $request)
+    public function destroyByUserIP(Request $request)
     {
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 0));
