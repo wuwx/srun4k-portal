@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Connection;
 use App\Http\Requests\ConnectionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -79,7 +80,7 @@ class ConnectionController extends Controller
             case 2:
                 return $this->destroyByUserIP($request);
             case 3:
-                return $this->destroyByUserIP($request);
+                return $this->destroyByUserName($request);
         }
     }
 
