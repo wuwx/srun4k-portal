@@ -45,7 +45,7 @@
 
           <div class="col-lg-10 col-sm-9">
 
-            <form name="form2" action="/connection" class="form-horizontal" method="post" onsubmit="return check(this)">
+            <form name="form2" action="/connection" class="form-horizontal" method="post" data-remote="true">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <input type="hidden" name="action" value="login">
                 <input type="hidden" name="ac_id" value="1">
@@ -82,7 +82,7 @@
                 -->
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <input type="submit" value="连接网络(Connect)" class="btn btn-primary">
+                    <input type="submit" value="连接网络(Connect)" class="btn btn-primary" data-disable-with="正在连接...">
                     <a href="/connection" class="btn btn-default" data-method="DELETE" data-remote="true" data-disable-with="正在断开..." data-params='{"action": "2"}'>断开网络(Disconnect)</a>
                     <a href="/connection" class="btn btn-default" data-method="DELETE" data-remote="true" data-disable-with="正在断开..." data-params='{"action": "3"}'>断开全部连接(Disconnect All)</a>
                   </div>
