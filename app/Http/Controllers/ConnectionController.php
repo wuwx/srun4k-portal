@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConnectionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 class ConnectionController extends Controller
 {
@@ -44,7 +45,13 @@ class ConnectionController extends Controller
         socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
-        return view('connection.create');
+        switch($request->format()) {
+            case 'js':
+                View::addExtension("js.blade.php", "blade");
+                return Response::make(view('connection.create'), 201, [
+                    'Content-Type' => "application/javascript; charset=UTF-8",
+                ]);
+        }
     }
 
     /**
