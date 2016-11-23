@@ -15,8 +15,8 @@ class ConnectionController extends Controller
 
     public function __construct()
     {
-        $this->portalServerHost = '127.0.0.1';
-        $this->portalServerPort = 3358;
+        $this->portalServerHost = env('PORTAL_SERVER_HOST', '127.0.0.1');
+        $this->portalServerPort = env('PORTAL_SERVER_PORT', '3358');
     }
 
     /**
@@ -46,9 +46,10 @@ class ConnectionController extends Controller
         socket_sendto($socket, $json, strlen($json), 0, $this->portalServerHost, $this->portalServerPort);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
+        $connection = Connection::findByUserIP($request->ip());
         switch($request->format()) {
             case 'js':
-                return Response::make(view('connection.create'), 201, [
+                return Response::make(view('connection.store', compact('connection')), 201, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
                 ]);
         }
@@ -62,11 +63,7 @@ class ConnectionController extends Controller
     public function show(Request $request)
     {
         $connection = Connection::findByUserIP($request->ip());
-        if ($json = Cache::get('json')) {
-            return json_decode($json)->posts[0]->title;
-        } else {
-            return view('connection.show');
-        }
+        return view('connection.show', compact('connection'));
     }
 
     /**
