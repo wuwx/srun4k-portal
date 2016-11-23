@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'ConnectionController@show');
+Route::get('/', 'PortalController');
 Route::post('/connection', 'ConnectionController@store');
+Route::get('/connection', 'PortalController@show');
 Route::delete('/connection', 'ConnectionController@destroy');
-Route::resource('/post', 'PostController');
+Route::get('/post', 'PostController@index');
