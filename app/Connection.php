@@ -1,12 +1,13 @@
 <?php namespace App;
 
+use Illuminate\Support\Facades\Redis;
+
 class Connection
 {
-    public $user_ip;
-    public $user_name;
-
     public static function findByUserIP($user_ip)
     {
-        return new self;
+        $connection_id = Redis::get("key:rad_online:ip:$user_ip:0");
+        $connection = Redis::hGetAll("hash:rad_online:$connection_id");
+        return $connection;
     }
 }
