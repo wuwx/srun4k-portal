@@ -101,7 +101,14 @@ class ConnectionController extends Controller
         socket_sendto($socket, $json, strlen($json), 0, $this->portalServerHost, $this->portalServerPort);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
-        return view('connection.destroy');
+        switch(Request::format()) {
+            case 'js':
+                return Response::make(view('connection.destroy'), 200, [
+                    'Content-Type' => "application/javascript; charset=UTF-8",
+                ]);
+            case 'html':
+                return view('connection.destroy');
+        }
     }
 
     public function destroyByUserIP()

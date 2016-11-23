@@ -1,1 +1,1 @@
-alert("注销成功");
+$("#new_connection").replaceWith('{!! escape_javascript(view("connection.create")) !!}')
