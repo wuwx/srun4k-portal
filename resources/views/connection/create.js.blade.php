@@ -1,1 +1,1 @@
-alert("如果用户连接成功的连接信息");
+$('#new_connection').replaceWith("登录后的提示信息");

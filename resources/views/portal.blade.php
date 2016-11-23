@@ -45,7 +45,7 @@
 
           <div class="col-lg-10 col-sm-9">
 
-            <form name="form2" action="/connection" class="form-horizontal" method="post" data-remote="true">
+            <form id="new_connection" action="/connection" class="form-horizontal" method="post" data-remote="true">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <input type="hidden" name="action" value="login">
                 <input type="hidden" name="ac_id" value="1">
