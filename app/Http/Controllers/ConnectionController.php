@@ -48,6 +48,7 @@ class ConnectionController extends Controller
         switch($request->format()) {
             case 'js':
                 View::addExtension("js.blade.php", "blade");
+                View::addExtension("js.php", "php");
                 return Response::make(view('connection.create'), 201, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
                 ]);
