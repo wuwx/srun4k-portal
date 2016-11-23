@@ -26,7 +26,7 @@
 
       <div class="toolbar hidden-xs">
         <ul class="nav nav-tabs" role="tablist">
-          <li class="active"><a href="#">IP控制网关</a></li>
+          <li class="active"><a href="/">IP控制网关</a></li>
           <!--<li><a href="http://jifei.neu.edu.cn/user" target="_blank">计费自助服务</a></li>-->
           <li><a href="http://ipgw.neu.edu.cn:8800" target="_blank">上网费用查询</a></li>
           <li><a href="http://stu.neu.edu.cn" target="_blank">学生电子邮件</a></li>
