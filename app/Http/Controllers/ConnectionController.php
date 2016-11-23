@@ -124,10 +124,14 @@ class ConnectionController extends Controller
 
         switch($request->format()) {
             case 'js':
+                View::addExtension("js.blade.php", "blade");
+                View::addExtension("js.php", "php");
                 return Response::make(view('connection.destroy'), 200, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
                 ]);
             case 'html':
+                View::addExtension("html.blade.php", "blade");
+                View::addExtension("html.php", "php");
                 return view('connection.destroy');
         }
 
