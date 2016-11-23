@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Connection;
 use App\Http\Requests\ConnectionRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
 
@@ -60,9 +60,9 @@ class ConnectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show()
     {
-        $connection = Connection::findByUserIP($request->ip());
+        $connection = Connection::findByUserIP(Request::ip());
         return view('connection.show', compact('connection'));
     }
 
@@ -71,17 +71,17 @@ class ConnectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy()
     {
-        switch ($request->action) {
+        switch (Request::query('action')) {
             case 2:
-                return $this->destroyByUserIP($request);
+                return $this->destroyByUserIP();
             case 3:
-                return $this->destroyByUserName($request);
+                return $this->destroyByUserName();
         }
     }
 
-    public function destroyByUserName(Request $request)
+    public function destroyByUserName()
     {
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 0));
@@ -94,8 +94,8 @@ class ConnectionController extends Controller
             "action" => 3,
             'serial_code' => time().rand(111111,999999),
             'time' => time(),
-            'user_name' => $request->user_name,
-            'user_password' => $request->user_password,
+            'user_name' => Request::query('user_name'),
+            'user_password' => Request::query('user_password'),
         ];
         $json = json_encode($array);
         socket_sendto($socket, $json, strlen($json), 0, $this->portalServerHost, $this->portalServerPort);
@@ -104,7 +104,7 @@ class ConnectionController extends Controller
         return view('connection.destroy');
     }
 
-    public function destroyByUserIP(Request $request)
+    public function destroyByUserIP()
     {
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 0));
@@ -117,13 +117,13 @@ class ConnectionController extends Controller
             "action" => 2,
             'serial_code' => time() . rand(111111, 999999),
             'time' => time(),
-            'user_ip' => $request->ip(),
+            'user_ip' => Request::ip(),
         ];
         $json = json_encode($array);
         socket_sendto($socket, $json, strlen($json), 0, $this->portalServerHost, $this->portalServerPort);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
-        switch($request->format()) {
+        switch(Request::format()) {
             case 'js':
                 return Response::make(view('connection.destroy'), 200, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
