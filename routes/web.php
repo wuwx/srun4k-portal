@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'PortalController');
+Route::get('/post', 'PostController@index');
 Route::post('/connection', 'ConnectionController@store');
 Route::get('/connection', 'PortalController@show');
 Route::delete('/connection', 'ConnectionController@destroy');
-Route::get('/post', 'PostController@index');
