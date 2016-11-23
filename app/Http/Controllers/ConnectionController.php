@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Response;
 
 class ConnectionController extends Controller
 {
-    private $_porta_server_ip;
-    private $_portal_server_port;
+    private $portalServerIP;
+    private $portalServerPort;
 
     public function __construct()
     {
-        $this->_porta_server_ip = '127.0.0.1';
-        $this->_porta_server_port = 3358;
+        $this->portalServerIP = '127.0.0.1';
+        $this->portalServerPort = 3358;
     }
 
     /**
@@ -41,7 +41,7 @@ class ConnectionController extends Controller
 
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 2, "usec" => 0));
-        socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
+        socket_sendto($socket, $json, strlen($json), 0, $this->portalServerIP, $this->portalServerPort);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
         switch($request->format()) {
@@ -94,7 +94,7 @@ class ConnectionController extends Controller
             'user_password' => $request->user_password,
         ];
         $json = json_encode($array);
-        socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
+        socket_sendto($socket, $json, strlen($json), 0, $this->portalServerIP, $this->portalServerPort);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
         return view('connection.destroy');
@@ -116,7 +116,7 @@ class ConnectionController extends Controller
             'user_ip' => $request->ip(),
         ];
         $json = json_encode($array);
-        socket_sendto($socket, $json, strlen($json), 0, $this->_porta_server_ip, $this->_porta_server_port);
+        socket_sendto($socket, $json, strlen($json), 0, $this->portalServerIP, $this->portalServerPort);
         socket_recvfrom($socket, $buffer, 1024, 0, $from, $port);
 
         switch($request->format()) {
