@@ -73,7 +73,7 @@ class ConnectionController extends Controller
      */
     public function destroy()
     {
-        switch (Request::query('action')) {
+        switch (Request::input('action')) {
             case 2:
                 return $this->destroyByUserIP();
             case 3:
@@ -94,8 +94,8 @@ class ConnectionController extends Controller
             "action" => 3,
             'serial_code' => time().rand(111111,999999),
             'time' => time(),
-            'user_name' => Request::query('user_name'),
-            'user_password' => Request::query('user_password'),
+            'user_name' => Request::input('user_name'),
+            'user_password' => Request::input('user_password'),
         ];
         $json = json_encode($array);
         socket_sendto($socket, $json, strlen($json), 0, $this->portalServerHost, $this->portalServerPort);

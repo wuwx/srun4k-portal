@@ -16,7 +16,7 @@
         data() {
             this.$http.get('/post')
                 .then(function(response) {
-                    this.posts = response.data.posts.slice(0, 7);
+                    this.posts = response.data.posts.slice(0, 5);
                     this.posts.forEach(function(post){
                         post.title = post.title.substr(0, 29);
                         post.date  = post.date.substr(0, post.date.indexOf(" "));
