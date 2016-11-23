@@ -90,7 +90,6 @@
               </form>
             </div>
         </div>
-
         <div class="row">
           <div class="col-md-6">
             <network />
@@ -117,9 +116,6 @@
             </div>
           </div>
         </div>
-        <!--div class="well">
-          <p>hello</p>
-        </div-->
       	<div class="well">
           <div class="pull-right hidden-xs">
             <img src="/img/weixin.jpg" width="100px" />

@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('jquery-ujs');
+require('jquery-flot');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
