@@ -4,6 +4,7 @@ RUN apt-get update \
         libz-dev \
         git \
     && docker-php-ext-install \
+        sockets \
         zip \
 
     && apt-get clean \
