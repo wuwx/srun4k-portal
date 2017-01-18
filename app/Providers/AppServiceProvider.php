@@ -16,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $format = Request::format();
-        View::addExtension("$format.blade.php", "blade");
-        View::addExtension("$format.php", "php");
+        View::addExtension("$format.blade.php", 'blade');
+        View::addExtension("$format.php", 'php');
     }
 
     /**
