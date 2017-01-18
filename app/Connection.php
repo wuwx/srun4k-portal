@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Support\Facades\Redis;
 
@@ -8,6 +10,7 @@ class Connection
     {
         $online_id = Redis::get("key:rad_online:ip:$user_ip:0");
         $connection = Redis::hGetAll("hash:rad_online:$online_id");
+
         return $connection;
     }
 }

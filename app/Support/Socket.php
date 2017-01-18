@@ -1,4 +1,6 @@
-<?php namespace App\Support;
+<?php
+
+namespace App\Support;
 
 class Socket
 {
@@ -7,7 +9,7 @@ class Socket
     public function __construct()
     {
         $this->socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 0));
+        socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => 1, 'usec' => 0]);
     }
 
     public function write($message)
@@ -16,9 +18,9 @@ class Socket
         $portal_server_port = env('PORTAL_SERVER_PORT', '3358');
         socket_sendto($this->socket, $message, strlen($message), 0, $portal_server_host, $portal_server_port);
 
-        $buffer = "";
-        $from = "";
-        $port = "";
+        $buffer = '';
+        $from = '';
+        $port = '';
         socket_recvfrom($this->socket, $buffer, 1024, 0, $from, $port);
         echo $buffer;
     }

@@ -24,7 +24,7 @@ class ConnectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_name' => 'required',
+            'user_name'     => 'required',
             'user_password' => 'required',
         ];
     }
