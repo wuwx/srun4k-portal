@@ -1,6 +1,7 @@
 <?php namespace App\Support;
 
-class Socket {
+class Socket
+{
     private $socket;
 
     public function __construct()

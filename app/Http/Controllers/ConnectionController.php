@@ -39,7 +39,7 @@ class ConnectionController extends Controller
         $this->socket->write($json);
 
         $connection = Connection::findByUserIP($request->ip());
-        switch($request->format()) {
+        switch ($request->format()) {
             case 'js':
                 return Response::make(view('connection.store', compact('connection')), 201, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
@@ -76,7 +76,7 @@ class ConnectionController extends Controller
     public function destroyByUserName()
     {
         $array = [
-            'serial_code' => time().rand(111111,999999),
+            'serial_code' => time().rand(111111, 999999),
             'time' => time(),
             "action" => 3,
             'user_name' => Request::input('user_name'),
@@ -85,7 +85,7 @@ class ConnectionController extends Controller
         $json = json_encode($array);
         $this->socket->write($json);
 
-        switch(Request::format()) {
+        switch (Request::format()) {
             case 'js':
                 return Response::make(view('connection.destroy'), 200, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
@@ -106,7 +106,7 @@ class ConnectionController extends Controller
         $json = json_encode($array);
         $this->socket->write($json);
 
-        switch(Request::format()) {
+        switch (Request::format()) {
             case 'js':
                 return Response::make(view('connection.destroy'), 200, [
                     'Content-Type' => "application/javascript; charset=UTF-8",
@@ -114,6 +114,5 @@ class ConnectionController extends Controller
             case 'html':
                 return view('connection.destroy');
         }
-
     }
 }

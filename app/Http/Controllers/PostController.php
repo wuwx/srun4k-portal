@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        switch($request->format()) {
+        switch ($request->format()) {
             case "html":
                 return "";
             case "json":
@@ -22,6 +22,5 @@ class PostController extends Controller
                     'Content-Type' => "application/json; charset=UTF-8",
                 ]);
         }
-
     }
 }
