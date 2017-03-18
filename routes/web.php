@@ -16,3 +16,7 @@ Route::get('/post', 'PostController@index');
 Route::post('/connection', 'ConnectionController@store');
 Route::get('/connection', 'ConnectionController@show');
 Route::delete('/connection', 'ConnectionController@destroy');
+
+Route::get('/mobile', function () {
+    return view('mobile');
+});

@@ -14,8 +14,10 @@
     "jquery": "^3.1.1",
     "jquery-flot": "^0.8.3",
     "jquery-ujs": "^1.2.2",
+    "jquery-weui": "^1.0.1",
     "laravel-mix": "^0.8.3",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "vue": "^2.1.10",
+    "weui": "^1.1.1"
   }
 }
